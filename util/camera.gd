@@ -1,5 +1,6 @@
 class_name FreeLookCamera extends Camera3D
 
+
 enum RotationMode { FREE_LOOK, ORBIT, NONE }
 
 @export_range(0.0, 1.0) var mouse_sensitivity: float = 0.4

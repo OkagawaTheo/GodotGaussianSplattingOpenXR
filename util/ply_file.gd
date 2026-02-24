@@ -41,9 +41,7 @@ static func load_gaussian_splats(
 	var num_properties := len(point_cloud.properties)
 	var p := point_cloud.vertices
 
-	# ------------------------------------------------------------------
-	# NEW: Queues that workers will fill – upload happens later on render thread
-	# ------------------------------------------------------------------
+
 	var upload_data   : Array[PackedByteArray] = []
 	var upload_offset : Array[int]            = []
 	var upload_size   : Array[int]            = []

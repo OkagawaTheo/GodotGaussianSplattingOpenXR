@@ -20,7 +20,7 @@ In contrast, Gaussian splatting explicitly encodes volumetric density and color 
 Efficient rasterization of 3D Gaussians is only *one* of several key aspects highlighted in Kerbl, et al. Another important topic discussed is *model training*. The optimization of Gaussians’ rotations, scalings, positions, and quantity is key to the visual quality of the technique.
 
 One principal feature of the rasterizer described in Kerbl, et al. is that it is *differentiable*. This allows models to be optimized through machine learning techniques. As a clarification, Gaussian splatting *does not* employ the use of neural networks (contrasting methods such as NeRFs); however, it *does* use gradient-based optimization for training models. As a side note, this project only implements the forward pass of the full training pipeline.
-    
+	
 This project is based solely on the original paper. Since its publishing back in 2023, a lot of exciting research has been published which has refined and extended the original’s results. A summary of such can be found [here](https://github.com/MrNeRF/awesome-3D-gaussian-splatting)!
 
 **Note:** *This project only contains a minimal model as a sample for viewing. Models used in the original paper can be found in its associated [GitHub repo](https://github.com/graphdeco-inria/gaussian-splatting) (or directly downloaded via this [link](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/pretrained/models.zip)). Additional models in `.ply` format can be found on services such as [Polycam](https://poly.cam/) (not free).*
@@ -30,8 +30,8 @@ This project is based solely on the original paper. Since its publishing back in
 ### Splat Rendering
 A tile-based rasterizer is implemented entirely through compute shaders using Godot's RenderingDevice abstraction (in a similar manner to the CUDA approach used in Kerbl, et al.). The rasterization pipeline is comprised of four stages:
   1. **Projection** - Frustum culling is first applied against input Gaussians' means (world-space positions). The 3D covariance for each Gaussian is then calculated using its provided scale and quaternion before being projected into view-space.
-    
-     A bounding-box for each 'splatted' Gaussian is estimated using the eigenvalues of the projected covariance. For each tile that a bounding-box intersects, a key-value pair is generated: the key, comprised of 16-bits representing the tile's ID + 16-bits representing the view-space depth of the splat; and the value, comprised of a pointer to the splat.
+	
+	 A bounding-box for each 'splatted' Gaussian is estimated using the eigenvalues of the projected covariance. For each tile that a bounding-box intersects, a key-value pair is generated: the key, comprised of 16-bits representing the tile's ID + 16-bits representing the view-space depth of the splat; and the value, comprised of a pointer to the splat.
 
      Additionally, the color of the splat is calculated from the provided spherical harmonic coefficients and the view vector.
   4. **Sorting** - Key-value pairs are sorted such that pairs representing the same tile are contiguous memory and sorted by view-space depth.
