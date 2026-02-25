@@ -46,7 +46,7 @@ var texture_size : Vector2i :
 var load_thread := Thread.new()
 var is_loaded := false
 var should_enable_heatmap := [false]
-var render_scale := [1.0]
+var render_scale := [0.5]
 var model_scale := [1.0]
 var should_terminate_thread : Array[bool] = [false]
 var num_splats_loaded : Array[int] = [0]
