@@ -24,7 +24,7 @@ transform = Transform3D(0.99997044, 0, 0.0076793735, 0, 1, 0, -0.0076793735, 0, 
 [node name="SplatObject" type="Node3D" parent="Demo_ply" unique_id=1012384521]
 transform = Transform3D(1.0000005, 0, 0, 0, 1, 0, 0, 0, 1.0000005, 0.045311257, 0, -6.0354767)
 script = ExtResource("5_lquwl")
-ply_file_path = "res://resources/demo.ply"
+ply_file_path = "res://resources/gs_estatua_clean.ply"
 metadata/_custom_type_script = "uid://cim6fvds0x5qs"
 
 [editable path="XROrigin3D"]
