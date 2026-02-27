@@ -1,30 +1,51 @@
 [gd_scene format=3 uid="uid://dx4r13gqfh13"]
 
 [ext_resource type="Script" uid="uid://c7167vdpw23xf" path="res://main.gd" id="1_skarq"]
+[ext_resource type="Shader" uid="uid://bxm13d56c31bw" path="res://util/stereo_mix.gdshader" id="3_lquwl"]
 [ext_resource type="Script" uid="uid://cim6fvds0x5qs" path="res://util/splat_object.gd" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://b5d2qwob8k5k" path="res://player.tscn" id="7_272bh"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+render_priority = 0
+shader = ExtResource("3_lquwl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_lquwl"]
+size = Vector2(2, 2)
+
 [node name="Main" type="Node3D" unique_id=1650101234 node_paths=PackedStringArray("vr_camera", "stereo_screen", "splat_container")]
 script = ExtResource("1_skarq")
 vr_camera = NodePath("XROrigin3D/XRCamera3D")
-stereo_screen = NodePath("XROrigin3D/XRCamera3D/StereoScreen")
+stereo_screen = NodePath("XROrigin3D/StereoScreen")
 splat_container = NodePath("Demo_ply")
 
 [node name="XROrigin3D" parent="." unique_id=219040919 instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.207)
 
-[node name="StereoScreen" parent="XROrigin3D/XRCamera3D" parent_id_path=PackedInt32Array(219040919, 267739494) index="0" unique_id=801130091]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013756752, 0, -1.0024462)
+[node name="StereoScreen" type="MeshInstance3D" parent="XROrigin3D" unique_id=39666326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.197)
+material_override = SubResource("ShaderMaterial_lquwl")
+mesh = SubResource("QuadMesh_lquwl")
+skeleton = NodePath("../XRCamera3D")
+
+[node name="XRCamera3D" parent="XROrigin3D" index="1" unique_id=267739494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.30754006)
+
+[node name="LeftHand" parent="XROrigin3D/LeftHand" parent_id_path=PackedInt32Array(219040919, 187171305) index="0" unique_id=1029747717]
+visible = false
+
+[node name="RightHand" parent="XROrigin3D" index="3" unique_id=44806406]
+visible = false
 
 [node name="StartXR" parent="." unique_id=1448105506 instance=ExtResource("6_7mycd")]
 
 [node name="Demo_ply" type="Node3D" parent="." unique_id=1870605482]
-transform = Transform3D(0.99997044, 0, 0.0076793735, 0, 1, 0, -0.0076793735, 0, 0.99997044, 0, 0, -2.9468977)
+transform = Transform3D(0.99997044, 0, 0.0076793735, 0, 1, 0, -0.0076793735, 0, 0.99997044, 1.0785508, 0, -2.9468977)
 
 [node name="SplatObject" type="Node3D" parent="Demo_ply" unique_id=1012384521]
-transform = Transform3D(1.0000005, 0, 0, 0, 1, 0, 0, 0, 1.0000005, 0.045311257, 0, -6.0354767)
+transform = Transform3D(1.0000014, 0, 0, 0, 1, 0, 0, 0, 1.0000014, -1.1522402, 1.5058256, 2.492207)
 script = ExtResource("5_lquwl")
-ply_file_path = "res://resources/gs_estatua_clean.ply"
+ply_file_path = "res://resources/demo.ply"
 metadata/_custom_type_script = "uid://cim6fvds0x5qs"
 
 [editable path="XROrigin3D"]

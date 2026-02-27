@@ -44,7 +44,7 @@ func reload_all_splats() -> void:
 			var gaussian_rasterizer_right = GaussianSplattingRasterizer.new(ply_file,render_size,texture_right,camera,splat_child,1)
 			rasterizer_right.append(gaussian_rasterizer_right)
 		
-	# TEMPORARY SHADER CONNECTION 
+	# TEMPORARY SHADER killCONNECTION 
 	if rasterizer_left.size() > 0:
 		stereo_screen.material_override.set_shader_parameter("texture_left",rasterizer_left[0].render_texture)
 		stereo_screen.material_override.set_shader_parameter("texture_right",rasterizer_right[0].render_texture) # temporary fix. only render one ply.
